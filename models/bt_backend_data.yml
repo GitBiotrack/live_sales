@@ -1,0 +1,55 @@
+version: 2
+
+sources:
+  - name: postgres_cann_replication_public
+    description: Trace tables in snowflake
+    tables:
+      - name: bmsi_customers_raw
+      - name: bmsi_dispensing_raw
+      - name: bmsi_locations_raw
+      - name: bmsi_inventory_raw
+      - name: log_bmsi_inventory_raw
+      - name: bmsi_inventoryrooms_raw
+      - name: bmsi_inventorytypes_raw
+      - name: customers_raw
+      - name: conditions_raw
+      - name: discounts_raw
+      - name: inventorylog_raw
+      - name: inventory_raw
+      - name: inventoryrooms_raw
+      - name: inventorytypes_raw
+      - name: locations_raw
+      - name: location_type_desc
+      - name: org
+      - name: payments_raw
+      - name: perfs_raw
+      - name: productcategories_raw
+      - name: productslog_raw
+      - name: products_raw
+      - name: rooms_raw
+      - name: sales_raw
+      - name: taxcategories_raw
+      - name: tickets_raw
+      - name: vendors_raw
+
+models:
+  - name: stg_sales_retail
+    columns:
+      - name: saleid
+        tests:
+          - not_null
+  - name: int_sales_retail
+    columns:
+      - name: saleid
+        tests:
+          - not_null
+  - name: retail_transaction_detail
+    config:
+      # rename table for looker
+      alias: pos_transaction_detail
+    columns:
+      - name: saleid
+        tests:
+          - not_null
+
+  
