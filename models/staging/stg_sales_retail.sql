@@ -38,10 +38,10 @@ selected as  (
         -- DEI-236
         current_timestamp() as extract_date,
         s._fivetran_synced as last_sync
-    from postgres_cann_replication_public.sales_raw s
+    from pc_fivetran_db.postgres_cann_replication_public.sales_raw s
     left join prod_analytics_db.prod.stg_sales_retail r
     on s.org = r.org and s.id = r.saleid 
-    join postgres_cann_replication_public.org o on s.org = o.orgid
+    join pc_fivetran_db.postgres_cann_replication_public.org o on s.org = o.orgid
     where r.org is null and s._fivetran_deleted = 0 
     and to_timestamp(s.datetime) > GETDATE() - interval '2 days'
      
